@@ -52,3 +52,23 @@ end
 function y = b_newt_diff2(Y,h)
 	y =  ( Y(1) - 2 * Y(2) + Y(3) ) / h^2
 end
+
+
+
+
+
+function y = newt_diff_fr(Y,X,x,h)
+	idx = find(X==x);
+	if (idx == length(X))
+		elems = [X(idx), X(idx-1), X(idx-2)]
+		y = b_newt_diff1(elems,h)
+
+	elseif (idx == 1)
+		elems = [X(idx), X(idx+1), X(idx+2)]
+		y = f_newt_diff1(elems,h)
+	else
+		elems = [X(idx-1), X(idx), X(idx+1)]
+		y = c_newt_diff1(elems,h)
+	endif
+	endfunction
+
