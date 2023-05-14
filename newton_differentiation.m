@@ -1,4 +1,5 @@
 Y = [] %it doesn't like when I don't add this
+% ze basic functions for differentiating
 function y = f_newt_diff1(Y,h)
 	y = ( Y(2) - Y(1) ) / h
 end
@@ -12,17 +13,18 @@ function y = b_newt_diff1(Y,h)
 	y = ( Y(1) - Y(2) ) / h
 end
 
-
+% this one retrieves elements from "table" and decides which one to usejava
+% uses Centered when possible
 function y = newt_diff_fr1(Y,X,x,h)
 	idx = find(X==x);
-	if (idx == length(X))
+	if (idx == length(X)) %backwards
 		elems = [Y(idx), Y(idx-1)]
 		y = b_newt_diff1(elems,h)
 
-	elseif (idx == 1)
+	elseif (idx == 1) %forwards
 		elems = [Y(idx), Y(idx+1)]
 		y = f_newt_diff1(elems,h)
-	else
+	else %centered
 		elems = [Y(idx-1), Y(idx+1)]
 		y = c_newt_diff1(elems,h)
 	endif
@@ -41,7 +43,7 @@ newt_diff_fr1(Y,X,1,1)
 
 
 
-
+% functions but...level 2!
 function y = f_newt_diff2(Y,h)
 	y =  ( Y(3) - 2 * Y(2) + Y(1) ) / h^2
 end
@@ -58,8 +60,8 @@ end
 
 
 
-
-function y = newt_diff_fr2(Y,X,x,h)
+%Defaults to center level 2
+function y = newt_diff_fr2(Y,X,x,h) %Y -> f(x), X -> x, x -> value we want, h..
 	idx = find(X==x);
 	if (idx == length(X)) %forwards
 		elems = [Y(idx), Y(idx-1), Y(idx-2)]
