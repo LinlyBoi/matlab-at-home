@@ -1,34 +1,21 @@
 Y = [] %it doesn't like when I don't add this
 % ze basic functions for differentiating
-function y = f_newt_diff1(Y,h)
-	y = ( Y(2) - Y(1) ) / h
+function y = f_newt_diff1(x,h,f)
+	y = ( f(x+h) - f(x) ) / h
 end
 
-function y = c_newt_diff1(Y,h)
-	y = ( Y(2) - Y(1) ) / ( 2 * h )
+function y = c_newt_diff1(x,h,f)
+	y = ( f(x+h) - f(x-h) / ( 2 * h )
 end
 
 
-function y = b_newt_diff1(Y,h)
-	y = ( Y(1) - Y(2) ) / h
+function y = b_newt_diff1(x,h)
+	y = ( f(x) - f(x-h) / h
 end
 
 % this one retrieves elements from "table" and decides which one to usejava
 % uses Centered when possible
-function y = newt_diff_fr1(Y,X,x,h)
-	idx = find(X==x);
-	if (idx == length(X)) %backwards
-		elems = [Y(idx), Y(idx-1)]
-		y = b_newt_diff1(elems,h)
 
-	elseif (idx == 1) %forwards
-		elems = [Y(idx), Y(idx+1)]
-		y = f_newt_diff1(elems,h)
-	else %centered
-		elems = [Y(idx-1), Y(idx+1)]
-		y = c_newt_diff1(elems,h)
-	endif
-	endfunction
 
 X = [0 1 2 3 4]
 Y = X.^2
